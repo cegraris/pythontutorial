@@ -161,6 +161,7 @@ from fractions import Fraction
 # print(list(map(sum,M)))
 # print({sum(row) for row in M}) #集合
 # print({i : sum(M[i]) for i in range(3)}) #字典
+# print(list(zip(['a','b','c'],[1,2,3])))
 
 # dictionary ============================================
 D = {'food': 'Spam','quantity': 4, 'color': 'pink'}
@@ -174,6 +175,10 @@ D['age'] = 40
 print(D)
 D['age'] = 30
 print(D)
+print(dict(name='mel',age=45))
+print(dict([('name','mel'),('age',45)]))
+print(dict.fromkeys(['a','b'],0))
+print(dict.fromkeys('spam'))
 rec = {'name': {'first': 'Bob', 'last': 'Smith'},
        'job': ['dev', 'mgr'],
        'age': 40.5}
@@ -184,6 +189,10 @@ print(rec['job'][-1])
 rec['job'].append('janitor')
 print(rec)
 D = {'a': 1, 'b': 2, 'c': 3}
+D.update({'d':4, 'e':5})
+print(D)
+D.pop('e')
+print(D)
 print(D,list(D.values()),list(D.items()))
 Ks = list(D.keys())
 print(Ks.sort())
@@ -194,10 +203,23 @@ for key in sorted(D):
      print(key, '=>', D[key])
 if not 'f' in D:
      print('missing')
-value = D.get('f', 0)
+value = D.get('f', 0) # 找不到key默认返回0
 print(value)
 value = D['x'] if 'x' in D else 0
 print(value)
+try:
+    print(D.get('f'))
+except KeyError:
+    print(0)
+print(dict(zip(['a','b','c'],[1,2,3])))
+D = {k:v for (k,v) in zip(['a','b','c'],[1,2,3])}
+print(D)
+D = {x:x**2 for x in [1,2,3,4]}
+print(D)
+D = {c:c*4 for c in 'SPAM'}
+print(D)
+D = {c.lower():c+'!' for c in ['SPAM','EGGS','HAM']}
+print(D)
 
 # Tuple ======================================
 # T = (1,2,3,4)

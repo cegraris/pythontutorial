@@ -2,19 +2,40 @@ import math
 import random
 import re
 import decimal
+from decimal import Decimal
 from fractions import Fraction
 
 # Number======================================================
 print(type(1234),type(3.1415),type(3+4j),type(3e-10),type(3.14E10),type(4.0e+5))
 print(type(0xF),type(0XF),type(0o7),type(0O7),type(0b1),type(0B1))
-
-print(123+222)
+c = 123
+print(hex(c),oct(c),bin(c))
+print(int('64'),int('100',8),int('40',16),int('1000000',2))
+X = 99
+print(X.bit_length())
+print(123+222, sum((1,2,3,4)))
 print(1.5*4)
-print(2**100)
+print(2**100, pow(2,100))
+print(abs(-42.0),min(3,1,2,4),max(3,1,2,4))
+b = 2+3, 3+4 # 元祖
+print(b)
+print(repr(1/3))
+print(1/3)
+print(1j * 1j)
+print(2 + 1j * 3)
+print((2 + 1j) * 3)
 print(math.pi)
-print(math.sqrt(85))
+print(math.sqrt(85),math.sin(math.pi/2))
+print(math.floor(2.5)) # 向下取整
+print(math.floor(-2.5))
+print(math.trunc(2.5)) # 整数截断
+print(math.trunc(-2.5))
+print(round(2.567),round(2.567,2))
 print(random.random())
+print(random.randint(1,10))
 print(random.choice([1,2,3,4]))
+print(0.1+0.1+0.1-0.3)
+print(Decimal('0.1') +Decimal('0.1') +Decimal('0.1') - Decimal('0.3'))
 
 # string =====================================================
 # S = 'Spam'
@@ -202,3 +223,33 @@ print(random.choice([1,2,3,4]))
 # print(sue.lastName())
 # print(sue.giveRaise(.10))
 # print(sue.pay)
+
+# Operation ========================================
+"""
+操作优先级由低->high
+yield x #生成器函数发送协议
+lambda args: expression #生成匿名函数
+x if y else z
+x or y
+x and y
+not x
+x in y, x not in y
+x is y, x is not y 
+x < y, x<y<z, x <= y, x > y, x >= y, x == y, x != y
+x | y
+x ^ y # 异或
+x & y
+x << y, x >> y
+x + y, x - y, x * y, x % y, x / y, x // y
+-x, +x
+~x # 取反
+x ** y
+x[i]
+x[i:j:k]
+x(...)
+x.attr
+(...)
+[...]
+{...}
+"""
+

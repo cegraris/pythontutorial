@@ -178,7 +178,7 @@ print(D)
 print(dict(name='mel',age=45))
 print(dict([('name','mel'),('age',45)]))
 print(dict.fromkeys(['a','b'],0))
-print(dict.fromkeys('spam'))
+print(dict.fromkeys('spam',0))
 rec = {'name': {'first': 'Bob', 'last': 'Smith'},
        'job': ['dev', 'mgr'],
        'age': 40.5}
@@ -193,9 +193,11 @@ D.update({'d':4, 'e':5})
 print(D)
 D.pop('e')
 print(D)
-print(D,list(D.values()),list(D.items()))
-Ks = list(D.keys())
-print(Ks.sort())
+print(D,list(D.keys()),list(D.values()),list(D.items()))
+Ks = D.keys()
+print(Ks,'!')
+Ks = list(Ks)
+Ks.sort()
 print(Ks)
 for key in Ks:
      print(key, '=>', D[key])

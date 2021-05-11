@@ -4,6 +4,8 @@ import re
 import decimal
 from decimal import Decimal
 from fractions import Fraction
+import pickle
+import struct
 
 # Number======================================================
 # print(type(1234),type(3.1415),type(3+4j),type(3e-10),type(3.14E10),type(4.0e+5))
@@ -118,6 +120,7 @@ from fractions import Fraction
 
 # list ==============================================
 # L = [123,'spam',1.23]
+# L2 = L[:] #copy
 # print(len(L))
 # print(L[0])
 # print(L[:-1])
@@ -164,82 +167,139 @@ from fractions import Fraction
 # print(list(zip(['a','b','c'],[1,2,3])))
 
 # dictionary ============================================
-D = {'food': 'Spam','quantity': 4, 'color': 'pink'}
-print(D['food'])
-D['quantity'] += 1
-print(D)
-D = {}
-D['name'] = 'Bob'
-D['job'] = 'dev'
-D['age'] = 40
-print(D)
-D['age'] = 30
-print(D)
-print(dict(name='mel',age=45))
-print(dict([('name','mel'),('age',45)]))
-print(dict.fromkeys(['a','b'],0))
-print(dict.fromkeys('spam',0))
-rec = {'name': {'first': 'Bob', 'last': 'Smith'},
-       'job': ['dev', 'mgr'],
-       'age': 40.5}
-print(rec['name'])
-print(rec['name']['last'])
-print(rec['job'])
-print(rec['job'][-1])
-rec['job'].append('janitor')
-print(rec)
-D = {'a': 1, 'b': 2, 'c': 3}
-D.update({'d':4, 'e':5})
-print(D)
-D.pop('e')
-print(D)
-print(D,list(D.keys()),list(D.values()),list(D.items()))
-Ks = D.keys()
-print(Ks,'!')
-Ks = list(Ks)
-Ks.sort()
-print(Ks)
-for key in Ks:
-     print(key, '=>', D[key])
-for key in sorted(D):
-     print(key, '=>', D[key])
-if not 'f' in D:
-     print('missing')
-value = D.get('f', 0) # 找不到key默认返回0
-print(value)
-value = D['x'] if 'x' in D else 0
-print(value)
-try:
-    print(D.get('f'))
-except KeyError:
-    print(0)
-print(dict(zip(['a','b','c'],[1,2,3])))
-D = {k:v for (k,v) in zip(['a','b','c'],[1,2,3])}
-print(D)
-D = {x:x**2 for x in [1,2,3,4]}
-print(D)
-D = {c:c*4 for c in 'SPAM'}
-print(D)
-D = {c.lower():c+'!' for c in ['SPAM','EGGS','HAM']}
-print(D)
+# D = {'food': 'Spam','quantity': 4, 'color': 'pink'}
+# D2 = D.copy() # copy
+# import copy
+# D3 = copy.deepcopy(D) # deep copy
+# print(D['food'])
+# D['quantity'] += 1
+# print(D)
+# D = {}
+# D['name'] = 'Bob'
+# D['job'] = 'dev'
+# D['age'] = 40
+# print(D)
+# D['age'] = 30
+# print(D)
+# print(dict(name='mel',age=45))
+# print(dict([('name','mel'),('age',45)]))
+# print(dict.fromkeys(['a','b'],0))
+# print(dict.fromkeys('spam',0))
+# rec = {'name': {'first': 'Bob', 'last': 'Smith'},
+#        'job': ['dev', 'mgr'],
+#        'age': 40.5}
+# print(rec['name'])
+# print(rec['name']['last'])
+# print(rec['job'])
+# print(rec['job'][-1])
+# rec['job'].append('janitor')
+# print(rec)
+# D = {'a': 1, 'b': 2, 'c': 3}
+# D.update({'d':4, 'e':5})
+# print(D)
+# D.pop('e')
+# print(D)
+# print(D,list(D.keys()),list(D.values()),list(D.items()))
+# Ks = D.keys()
+# print(Ks,'!')
+# Ks = list(Ks)
+# Ks.sort()
+# print(Ks)
+# for key in Ks:
+#      print(key, '=>', D[key])
+# for key in sorted(D):
+#      print(key, '=>', D[key])
+# if not 'f' in D:
+#      print('missing')
+# value = D.get('f', 0) # 找不到key默认返回0
+# print(value)
+# value = D['x'] if 'x' in D else 0
+# print(value)
+# try:
+#     print(D.get('f'))
+# except KeyError:
+#     print(0)
+# print(dict(zip(['a','b','c'],[1,2,3])))
+# D = {k:v for (k,v) in zip(['a','b','c'],[1,2,3])}
+# print(D)
+# D = {x:x**2 for x in [1,2,3,4]}
+# print(D)
+# D = {c:c*4 for c in 'SPAM'}
+# print(D)
+# D = {c.lower():c+'!' for c in ['SPAM','EGGS','HAM']}
+# print(D)
 
 # Tuple ======================================
+# T = (1,) # 仅一个元素要加逗号，不然会以为是表达式
 # T = (1,2,3,4)
+# print(T)
+# L = [x + 20 for x in T]
+# print (tuple(L))
 # print(len(T))
-# print(T+(5, 6))
+# T = T+(5, 6, 4)
+# print(T)
 # print(T[0])
 # print(T.index(4))
+# print(T.index(4,4))
 # print(T.count(4))
+# T=('cc','aa','dd','bb')
+# tmp = list(T)
+# tmp.sort()
+# T = tuple(tmp)
+# print(T)
+# T=('cc','aa','dd','bb')
+# print(sorted(T))
+
 
 # File ========================================
 # f = open('data.txt', 'w')
+# """
+# w：为输出打开文件
+# r：为输入打开文件
+# a：为在文件尾部追加内容打开文件
+# 额外b：进行二进制数据处理
+# 额外+：同时为输入和输出打开文件
+# """
 # f.write('Hello\n')
 # f.write('world\n')
+# f.write('Happy\n')
+# f.write('Hour\n')
 # f.close()
 # f = open('data.txt')
+# print(f.readline())
+# print(f.readline())
 # text = f.read()
 # print(text)
 # print(text.split())
+#
+# for line in open('data.txt'):
+#     print(line,end='')
+#
+# eval('print("COde")')
+#
+# D = {'a':1,'b':2}
+# F = open('datafile.pkl','wb')
+# pickle.dump(D,F)
+# F.close()
+#
+# F = open('datafile.pkl','rb')
+# E = pickle.load(F)
+# print(E)
+#
+# """ 运行失败，原因不明
+# F = open('data.bin','wb')
+# data = struct.pack('>i4sh',7,'spam',8)
+# F.write(data)
+# F.close()
+#
+# F = open('data.bin','rb')
+# data = F.read()
+# values = struct.unpack('>i4sh',data)
+# print(values)
+# """
+
+
+
 
 # Set =========================================
 # X = set('spam')
@@ -326,7 +386,7 @@ x and y
 not x
 x in y, x not in y
 x is y, x is not y 
-x < y, x<y<z, x <= y, x > y, x >= y, x == y, x != y
+x < y, x<y<z, x <= y, x > y, x >= y, x == y, x != y  注意！==比较值，is比较地址
 x | y
 x ^ y # 异或
 x & y
@@ -344,3 +404,12 @@ x.attr
 {...}
 """
 
+# L1 = [1,('a',3)]
+# L2 = [1,('a',3)]
+# print(L1 == L2,L1 is L2)
+# L3 = [1,('a',2)]
+# print(L1 < L3, L1 == L3, L1 > L3)
+#
+# D1 = {'a':1,'b':2}
+# D2 = {'a':1,'b':3}
+# print(sorted(D1.items()) < sorted(D2.items()))

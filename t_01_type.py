@@ -132,6 +132,7 @@ import struct
 # del L[1]
 # print(L)
 # print(L.append('NI'))
+# print(L.extend([7,8])
 # print(L.pop(2))
 # print(L)
 # L.insert(2,'add2')

@@ -182,3 +182,45 @@
 #         ret = func(*pargs, **kargs)
 #     elapsed = time.clock()-start
 #     return (elapsed, ret)
+#
+# decorator =========================================
+# import functools
+# def log(func):
+#     @functools.wraps(func)
+#     def wrapper(*args,**kargs):
+#         print('call %s():' % func.__name__)
+#         return func(*args, **kargs)
+#     return wrapper
+#
+# @log # <=> now = log(now)
+# def now():
+#     print('2021')
+#
+# f = now
+# f()
+# print(now.__name__)
+#
+# def log2(text):
+#     def decorator(func):
+#         def wrapper(*args,**kargs):
+#             print('%s %s():' % (text, func.__name__))
+#             return func(*args, **kargs)
+#         return wrapper
+#     return decorator
+#
+# @log2('execute') # <=> log2('execute')(now)
+# def now():
+#     print('2021')
+#
+# f = now
+# f()
+# print(now.__name__)
+#
+# partial function ==========================================
+print(int('12345'))
+print(int('12345',base=8))
+print(int('12345',16))
+
+import functools
+int2 = functools.partial(int,base=2) #把int函数中base参数默认值设定为2,返回函数
+print(int2('100000'))

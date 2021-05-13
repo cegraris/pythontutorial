@@ -154,20 +154,121 @@ import numpy as np
 # x = np.arange(1,6)
 # print(np.multiply.outer(x,x)) # 外积(笛卡尔乘法)
 
+# 统计值 ===============================================
+# L = np.random.random(100)
+# print(np.sum(L))
+# print(np.min(L))
+# print(np.max(L))
+# print(np.mean(L))
+# print(np.std(L))
+# print(np.var(L))
+# print(np.percentile(L,25))
+# print(np.median(L))
 #
-L = np.random.random(100)
-print(np.sum(L))
-print(np.min(L))
-print(np.max(L))
-print(np.mean(L))
-print(np.std(L))
-print(np.var(L))
-print(np.percentile(L,25))
-print(np.median(L))
+# M = np.random.random((3,4))
+# print(M.sum())
+# print(M.min(axis=0))
 
-M = np.random.random((3,4))
-print(M.sum())
-print(M.min(axis=0))
+# 广播 ===========================================
+# a = np.array([0,1,2])
+# b = np.array([5,5,5])
+# print(a + b)
+# print(a + 5)
+# M = np.ones((3,3))
+# print(M+a)
+#
+# a = np.arange(1,7)
+# b = np.arange(1,7)[:,np.newaxis]
+# print(a)
+# print(b)
+# print(a+b)
+#
+# x = np.random.random((10,3))
+# print(x)
+# Xmean = x.mean(0)
+# print(Xmean)
+# x_centered = x - Xmean # 广播
+# print(x_centered)
 
+# 比较，掩码，布尔逻辑 =======================
+# x = np.array([1,2,3,4,5])
+# print(x<3)
+# print(x == 3)
+# print((2*x)==(x**2))
+#
+# rng = np.random.RandomState(0)
+# x = rng.randint(10, size=(3,4))
+# print(x)
+# print(np.count_nonzero(x<6))
+# print(np.sum(x<6))
+# print(np.sum(x<6,axis=1))
+#
+# print(np.any(x>8))
+# print(np.all(x<10))
+# print(np.all(x<8,axis=1))
+# print((x>3)&(x<6))
+# print(np.sum((x>3)&(x<6))) # &与 |或 ^异或 ~非
+#
+# print(x[x<5]) # 掩码操作
 
+# 花哨索引
+# rand = np.random.RandomState(42)
+# x = rand.randint(100,size=10)
+# print(x)
+#
+# print([x[3],x[7],x[2]])
+# ind = [3,7,4]
+# print(x[ind])
+# ind = np.array([[3,7],
+#                 [4,5]])
+# print(x[ind])
+#
+# x = np.arange(12).reshape((3,4))
+# print(x)
+# row = np.array([0,1,2])
+# col = np.array([2,1,3])
+# print(x[row,col])
+# print(x[row[:,np.newaxis],col])
+#
+# print(x[2,[2,0,1]])
+# print(x[1:,[2,0,1]])
+# mask = np.array([1,0,1,0],dtype=bool)
+# print(x)
+# print(row[:,np.newaxis])
+# print(mask)
+# print(x[row[:,np.newaxis],mask])
 
+# 排序 =====================================
+# x = np.array([2,1,4,3,6])
+# print(np.sort(x))
+# x.sort()
+# print(x)
+# x = np.array([2,1,4,3,6])
+# i = np.argsort(x)
+# print(i)
+#
+# rand = np.random.RandomState(42)
+# X = rand.randint(0,10,(4,6))
+# print(x)
+# print(np.sort(X,axis=0)) # 对每一列排序
+# print(np.sort(X,axis=1)) # 对每一行排序
+#
+# x = np.array([7,2,3,1,6,5,4])
+# print(np.partition(x,3)) # 分隔
+# print(np.partition(X,2,axis=1))
+#
+# X = rand.rand(10,2)
+# print(X)
+# print(X[:,np.newaxis,:].shape)
+# print(X[np.newaxis,:,:].shape)
+
+x = 1
+t = 3
+for i in range(100):
+    y = -x + np.exp(-0.001*t)*np.sin((np.pi/4)*t)
+    print('======%s=======' % i)
+    print(y,end='<<<y \n')
+    x = x + y
+    t = t + y
+    print(x,end='<<<x \n')
+    print(t,end='<<<t \n')

@@ -131,21 +131,21 @@ ygrid = np.linspace(-6,6,40)
 Xgrid,Ygrid=np.meshgrid(xgrid,ygrid)
 Z = kde.evaluate(np.vstack([Xgrid.ravel(),Ygrid.ravel()]))
 # 画出结果图
-plt.imshow(Z.reshape(Xgrid.shape),
-           origin='lower',aspect='auto',
-           extent=[-3.5,3.5,-6,6],
-           cmap='Blues')
-cb=plt.colorbar()
-cb.set_label('density')
-
-plt.show()
-
-
-
-
-# x,y = np.meshgrid(np.linspace(0,10,10),np.linspace(-3,3,12))
-# u = 1
-# v = -np.power(y,3)+np.cos(5*x)
+# plt.imshow(Z.reshape(Xgrid.shape),
+#            origin='lower',aspect='auto',
+#            extent=[-3.5,3.5,-6,6],
+#            cmap='Blues')
+# cb=plt.colorbar()
+# cb.set_label('density')
 #
-# plt.quiver(x,y,u,v)
 # plt.show()
+
+
+
+
+x,y = np.meshgrid(np.linspace(0,10,10),np.linspace(-3,3,12))
+u = 1
+v = -np.sin(y) + np.exp(-2*x)
+
+plt.quiver(x,y,u,v)
+plt.show()

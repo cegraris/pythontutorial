@@ -4,11 +4,11 @@ import numpy as np
 plt.style.use('classic')
 
 x = np.linspace(0,10,100)
-# fig = plt.figure()
-# plt.plot(x,np.sin(x),'-')
-# plt.plot(x,np.cos(x),'--')
-#
-# plt.show()
+fig = plt.figure()
+plt.plot(x,np.sin(x),'-')
+plt.plot(x,np.cos(x),'--')
+
+plt.show()
 #
 # 保存图片 ==============================
 # fig.savefig('my_figure.png')
